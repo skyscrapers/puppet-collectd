@@ -20,25 +20,27 @@
 # This class is called from collectd
 #
 class collectd::repo {
+  if !defined(Class['apt']) {
+    class { 'apt': }
+  }
+
   if ($::lsbdistrelease == '10.04') {
     apt::source { 'skyscrapers-collectd':
-            location          => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-            release           => 'lucid-skyscrapers',
-            repos             => 'main',
-            required_packages => 'debian-keyring debian-archive-keyring',
-            key               => '1BC1B9EF',
-            key_source        => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
-            include_src       => false,
+      location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+      release     => 'lucid-skyscrapers',
+      repos       => 'main',
+      key         => '1BC1B9EF',
+      key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+      include_src => false,
     }
   } elsif ($::lsbdistrelease == '12.04') {
     apt::source { 'skyscrapers-collectd':
-            location          => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-            release           => 'precise-skyscrapers',
-            repos             => 'main',
-            required_packages => 'debian-keyring debian-archive-keyring',
-            key               => '1BC1B9EF',
-            key_source        => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
-            include_src       => false,
+      location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+      release     => 'precise-skyscrapers',
+      repos       => 'main',
+      key         => '1BC1B9EF',
+      key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+      include_src => false,
     }
   }
 }
