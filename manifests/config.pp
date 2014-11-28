@@ -79,4 +79,17 @@ class collectd::config {
     }
   }
 
+  if ('couchdb' in $::puppet_classes) {
+    file {
+      "$confincludedir/couchdb.conf":
+      ensure   => file,
+      source   => "puppet:///modules/collectd/etc/collectd/collectd.conf.d/couchdb.conf",
+      mode     => '0644',
+      owner    => root,
+      group    => root,
+      require  => File[$confincludedir],
+      notify   => Class['collectd::service'];
+    }
+  }
+
 }
