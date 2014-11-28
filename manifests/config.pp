@@ -50,6 +50,9 @@ class collectd::config {
       require => Class['collectd::install'];
   }
 
+  # Autodiscover services
+  # Defined function wasn't an option because of issues with the ordering of loaded classes.
+
   if ('apache2' in $::puppet_classes) {
     file {
       "$confincludedir/apache2.conf":
@@ -60,6 +63,19 @@ class collectd::config {
         group    => root,
         require  => File[$confincludedir],
         notify   => Class['collectd::service'];
+    }
+  }
+
+  if ('nginx' in $::puppet_classes) {
+    file {
+      "$confincludedir/nginx.conf":
+      ensure   => file,
+      source   => "puppet:///modules/collectd/etc/collectd/collectd.conf.d/nginx.conf",
+      mode     => '0644',
+      owner    => root,
+      group    => root,
+      require  => File[$confincludedir],
+      notify   => Class['collectd::service'];
     }
   }
 
