@@ -48,7 +48,9 @@ class collectd(
   $server            = undef,
   $security_level    = $collectd::params::security_level,
   $username          = undef,
-  $password          = undef
+  $password          = undef,
+  $mysql_username    = undef,
+  $mysql_password    = undef
 ) inherits collectd::params {
 
   include collectd::repo
