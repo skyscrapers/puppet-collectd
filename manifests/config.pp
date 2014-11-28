@@ -92,4 +92,17 @@ class collectd::config {
     }
   }
 
+  if ('pdns' in $::puppet_classes) {
+    file {
+      "$confincludedir/powerdns.conf":
+      ensure   => file,
+      source   => "puppet:///modules/collectd/etc/collectd/collectd.conf.d/powerdns.conf",
+      mode     => '0644',
+      owner    => root,
+      group    => root,
+      require  => File[$confincludedir],
+      notify   => Class['collectd::service'];
+    }
+  }
+
 }
