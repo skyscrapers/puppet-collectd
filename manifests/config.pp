@@ -51,14 +51,16 @@ class collectd::config {
   }
 
   if ('apache2' in $::puppet_classes) {
-    "$confincludedir/apache2.conf":
-      ensure   => file,
-      source   => "puppet:///modules/collectd/etc/collectd/collectd.conf.d/apache2.conf",
-      mode     => '0644',
-      owner    => root,
-      group    => root,
-      require  => File[$confincludedir],
-      notify   => Class['collectd::service'];
+    file {
+      "$confincludedir/apache2.conf":
+        ensure   => file,
+        source   => "puppet:///modules/collectd/etc/collectd/collectd.conf.d/apache2.conf",
+        mode     => '0644',
+        owner    => root,
+        group    => root,
+        require  => File[$confincludedir],
+        notify   => Class['collectd::service'];
+    }
   }
 
 }
