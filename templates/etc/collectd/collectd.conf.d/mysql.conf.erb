@@ -1,0 +1,11 @@
+# PUPPETIZED
+
+LoadPlugin mysql
+<Plugin mysql>
+    <Database "mysql">
+        Host "localhost"
+        Port 3306
+        User "<%= @mysql_username %>"
+        Password "<%= @mysql_password %>"
+    </Database>
+</Plugin>
