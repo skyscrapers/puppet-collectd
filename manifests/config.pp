@@ -22,37 +22,43 @@
 class collectd::config {
 
   if ($::lsbdistrelease == '14.04') {
-    file {
-      '/etc/collectd/collectd.conf':
-          ensure  => file,
-          content => template('collectd/etc/collectd/collectd.conf'),
-          mode    => '0644',
-          owner   => root,
-          group   => root,
-          require => Class['collectd::install'],
-          notify  => Class['collectd::service'];
-    }
+    $mainconffile             = '/etc/collectd/collectd.conf'
+    $mainconftemplatelocation = 'collectd/etc/collectd/collectd.conf'
+    $confincludedir           = '/etc/collectd/collectd.conf.d'
   }
   elsif (($::lsbdistrelease == '10.04') or ($::lsbdistrelease == '12.04')) {
-    file {
-      '/usr/local/collectd/etc/collectd.d':
-        ensure  => directory,
-        mode    => '0755',
-        owner   => root,
-        group   => root,
-        require => Class['collectd::install'],
-        notify  => Class['collectd::service'];
-    }
-
-    file {
-      '/usr/local/collectd/etc/collectd.conf':
-        ensure  => file,
-        content => template('collectd/usr/local/collectd/etc/collectd.conf'),
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => Class['collectd::install'],
-        notify  => Class['collectd::service'];
-    }
+    $mainconffile             = '/usr/local/collectd/etc/collectd.conf'
+    $mainconftemplatelocation = 'collectd/usr/local/collectd/etc/collectd.conf'
+    $confincludedir           = '/usr/local/collectd/etc/collectd.d'
   }
+
+  file {
+    $mainconffile:
+      ensure  => file,
+      content => template($mainconftemplatelocation),
+      mode    => '0644',
+      owner   => root,
+      group   => root,
+      require => Class['collectd::install'],
+      notify  => Class['collectd::service'];
+
+    $confincludedir:
+      ensure  => directory,
+      mode    => '0755',
+      owner   => root,
+      group   => root,
+      require => Class['collectd::install'];
+  }
+
+  if ('apache2' in $::puppet_classes) {
+    "$confincludedir/apache2.conf":
+      ensure   => file,
+      source   => "puppet:///modules/collectd/etc/collectd/collectd.conf.d/apache2.conf",
+      mode     => '0644',
+      owner    => root,
+      group    => root,
+      require  => File[$confincludedir],
+      notify   => Class['collectd::service'];
+  }
+
 }
