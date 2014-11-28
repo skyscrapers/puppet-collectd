@@ -105,4 +105,17 @@ class collectd::config {
     }
   }
 
+  if ('varnish' in $::puppet_classes) {
+    file {
+      "$confincludedir/varnish.conf":
+      ensure   => file,
+      source   => "puppet:///modules/collectd/etc/collectd/collectd.conf.d/varnish.conf",
+      mode     => '0644',
+      owner    => root,
+      group    => root,
+      require  => File[$confincludedir],
+      notify   => Class['collectd::service'];
+    }
+  }
+
 }
