@@ -53,81 +53,83 @@ class collectd::config {
   # Autodiscover services
   # Defined function wasn't an option because of issues with the ordering of loaded classes.
 
-  if ('apache2' in $::puppet_classes) {
-    file {
-      "$confincludedir/apache2.conf":
-        ensure  => file,
-        source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/apache2.conf',
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => File[$confincludedir],
-        notify  => Class['collectd::service'];
+  if ($::puppet_classes) {
+    if ('apache2' in $::puppet_classes) {
+      file {
+        "$confincludedir/apache2.conf":
+          ensure  => file,
+          source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/apache2.conf',
+          mode    => '0644',
+          owner   => root,
+          group   => root,
+          require => File[$confincludedir],
+          notify  => Class['collectd::service'];
+      }
     }
-  }
 
-  if ('nginx' in $::puppet_classes) {
-    file {
-      "$confincludedir/nginx.conf":
-        ensure  => file,
-        source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/nginx.conf',
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => File[$confincludedir],
-        notify  => Class['collectd::service'];
+    if ('nginx' in $::puppet_classes) {
+      file {
+        "$confincludedir/nginx.conf":
+          ensure  => file,
+          source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/nginx.conf',
+          mode    => '0644',
+          owner   => root,
+          group   => root,
+          require => File[$confincludedir],
+          notify  => Class['collectd::service'];
+      }
     }
-  }
 
-  if ('couchdb' in $::puppet_classes) {
-    file {
-      "$confincludedir/couchdb.conf":
-        ensure  => file,
-        source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/couchdb.conf',
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => File[$confincludedir],
-        notify  => Class['collectd::service'];
+    if ('couchdb' in $::puppet_classes) {
+      file {
+        "$confincludedir/couchdb.conf":
+          ensure  => file,
+          source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/couchdb.conf',
+          mode    => '0644',
+          owner   => root,
+          group   => root,
+          require => File[$confincludedir],
+          notify  => Class['collectd::service'];
+      }
     }
-  }
 
-  if ('pdns' in $::puppet_classes) {
-    file {
-      "$confincludedir/powerdns.conf":
-        ensure  => file,
-        source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/powerdns.conf',
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => File[$confincludedir],
-        notify  => Class['collectd::service'];
+    if ('pdns' in $::puppet_classes) {
+      file {
+        "$confincludedir/powerdns.conf":
+          ensure  => file,
+          source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/powerdns.conf',
+          mode    => '0644',
+          owner   => root,
+          group   => root,
+          require => File[$confincludedir],
+          notify  => Class['collectd::service'];
+      }
     }
-  }
 
-  if ('varnish' in $::puppet_classes) {
-    file {
-      "$confincludedir/varnish.conf":
-        ensure  => file,
-        source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/varnish.conf',
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => File[$confincludedir],
-        notify  => Class['collectd::service'];
+    if ('varnish' in $::puppet_classes) {
+      file {
+        "$confincludedir/varnish.conf":
+          ensure  => file,
+          source  => 'puppet:///modules/collectd/etc/collectd/collectd.conf.d/varnish.conf',
+          mode    => '0644',
+          owner   => root,
+          group   => root,
+          require => File[$confincludedir],
+          notify  => Class['collectd::service'];
+      }
     }
-  }
 
-  if ('mysql' in $::puppet_classes) {
-    file {
-      "$confincludedir/mysql.conf":
-        ensure  => file,
-        content => template('collectd/etc/collectd/collectd.conf.d/mysql.conf.erb'),
-        mode    => '0644',
-        owner   => root,
-        group   => root,
-        require => File[$confincludedir],
-        notify  => Class['collectd::service'];
+    if ('mysql' in $::puppet_classes) {
+      file {
+        "$confincludedir/mysql.conf":
+          ensure  => file,
+          content => template('collectd/etc/collectd/collectd.conf.d/mysql.conf.erb'),
+          mode    => '0644',
+          owner   => root,
+          group   => root,
+          require => File[$confincludedir],
+          notify  => Class['collectd::service'];
+      }
     }
   }
 
