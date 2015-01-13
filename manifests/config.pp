@@ -23,12 +23,12 @@ class collectd::config {
 
   if ($::lsbdistrelease == '14.04') {
     $mainconffile             = '/etc/collectd/collectd.conf'
-    $mainconftemplatelocation = 'collectd/etc/collectd/collectd.conf'
+    $mainconftemplatelocation = 'collectd/etc/collectd/collectd.conf.erb'
     $confincludedir           = '/etc/collectd/collectd.conf.d'
   }
   elsif (($::lsbdistrelease == '10.04') or ($::lsbdistrelease == '12.04')) {
     $mainconffile             = '/usr/local/collectd/etc/collectd.conf'
-    $mainconftemplatelocation = 'collectd/usr/local/collectd/etc/collectd.conf'
+    $mainconftemplatelocation = 'collectd/usr/local/collectd/etc/collectd.conf.erb'
     $confincludedir           = '/usr/local/collectd/etc/collectd.d'
   }
 
