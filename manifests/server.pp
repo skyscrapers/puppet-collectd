@@ -77,6 +77,20 @@ class collectd::server(
       owner   => root,
       group   => root,
       notify  => Class['collectd::service'];
+
+    '/etc/cron.d/statsclean':
+      ensure  => file,
+      source  => 'puppet:///modules/collectd/etc/cron.d/statsclean',
+      mode    => '0644',
+      owner   => root,
+      group   => root;
+
+    '/root/scripts/cleanStats.sh':
+      ensure  => file,
+      source  => 'puppet:///modules/collectd/root/scripts/cleanStats.sh',
+      mode    => '0755',
+      owner   => root,
+      group   => root;
   }
 
 }

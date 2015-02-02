@@ -1,0 +1,3 @@
+## PUPPETIZED
+
+10 1 * * *	root	/root/scripts/cleanStats.sh
