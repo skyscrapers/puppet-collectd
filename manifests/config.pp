@@ -21,7 +21,7 @@
 #
 class collectd::config {
 
-  if ($::lsbdistrelease == '14.04') {
+  if (($::lsbdistrelease == '14.04') or ($::lsbdistrelease == '16.04')) {
     $mainconffile             = '/etc/collectd/collectd.conf'
     $mainconftemplatelocation = 'collectd/etc/collectd/collectd.conf.erb'
     $confincludedir           = '/etc/collectd/collectd.conf.d'
