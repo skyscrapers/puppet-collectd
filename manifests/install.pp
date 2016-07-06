@@ -21,7 +21,7 @@
 #
 class collectd::install {
 
-  if ($::lsbdistrelease == '14.04') {
+  if (($::lsbdistrelease == '14.04') or ($::lsbdistrelease == '16.04')) {
     $packagelist = ['collectd']
   } elsif (($::lsbdistrelease == '10.04') or ($::lsbdistrelease == '12.04')) {
     $packagelist = ['collectd-custom','libltdl-dev']
