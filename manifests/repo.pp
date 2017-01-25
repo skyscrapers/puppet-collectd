@@ -26,21 +26,23 @@ class collectd::repo {
 
   if ($::lsbdistrelease == '10.04') {
     apt::source { 'skyscrapers-collectd':
-      location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-      release     => 'lucid-skyscrapers',
-      repos       => 'main',
-      key         => '1BC1B9EF',
-      key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
-      include_src => false,
+      location => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+      release  => 'lucid-skyscrapers',
+      repos    => 'main',
+      key      => {
+        'id'     => 'B9FFCA291BC1B9EF',
+        'source' => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+      },
     }
   } elsif ($::lsbdistrelease == '12.04') {
     apt::source { 'skyscrapers-collectd':
-      location    => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
-      release     => 'precise-skyscrapers',
-      repos       => 'main',
-      key         => '1BC1B9EF',
-      key_source  => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
-      include_src => false,
+      location => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/ubuntu/',
+      release  => 'precise-skyscrapers',
+      repos    => 'main',
+      key      => {
+        'id'     => 'B9FFCA291BC1B9EF',
+        'source' => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
+      },
     }
   }
 }
