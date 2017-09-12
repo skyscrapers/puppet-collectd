@@ -19,7 +19,7 @@
 #
 # This class is called from collectd for install.
 #
-class collectd::install {
+class collectd::install inherits ::collectd {
 
   if (($::lsbdistrelease == '14.04') or ($::lsbdistrelease == '16.04')) {
     $packagelist = ['collectd']

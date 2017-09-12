@@ -19,7 +19,7 @@
 #
 # This class is called from collectd
 #
-class collectd::config {
+class collectd::config inherits ::collectd {
 
   if (($::lsbdistrelease == '14.04') or ($::lsbdistrelease == '16.04')) {
     $mainconffile             = '/etc/collectd/collectd.conf'

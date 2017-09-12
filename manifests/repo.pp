@@ -19,7 +19,7 @@
 #
 # This class is called from collectd
 #
-class collectd::repo {
+class collectd::repo inherits ::collectd {
   if !defined(Class['apt']) {
     class { 'apt': }
   }
