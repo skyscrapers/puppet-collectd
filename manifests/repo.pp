@@ -30,7 +30,7 @@ class collectd::repo inherits ::collectd {
       release  => 'lucid-skyscrapers',
       repos    => 'main',
       key      => {
-        'id'     => 'B9FFCA291BC1B9EF',
+        'id'     => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
         'source' => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
       },
     }
@@ -40,7 +40,7 @@ class collectd::repo inherits ::collectd {
       release  => 'precise-skyscrapers',
       repos    => 'main',
       key      => {
-        'id'     => 'B9FFCA291BC1B9EF',
+        'id'     => '5D14BB9A4D883FC38BF3140C096343CA613ECD57',
         'source' => 'http://skypackages.s3-website-eu-west-1.amazonaws.com/gpg.key',
       },
     }
